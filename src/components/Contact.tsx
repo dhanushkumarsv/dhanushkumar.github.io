@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Send, MapPin, Mail, Phone, Github, Linkedin, Globe } from "lucide-react";
+import { Send, MapPin, Mail, Phone, Github, Linkedin, Globe, Book } from "lucide-react";
 
 export default function Contact() {
   return (
@@ -77,13 +77,22 @@ export default function Contact() {
                 <Linkedin size={28} />
               </a>
               <a 
-                href="https://dhanushkumar.github.io" 
+                href="https://dhanushkumarsv.github.io" 
                 target="_blank" 
                 rel="noopener noreferrer"
                 className="p-5 bg-accent/50 dark:bg-zinc-900 border border-border rounded-2xl text-foreground hover:text-primary hover:border-primary/50 transition-all shadow-xl"
                 title="Portfolio"
               >
                 <Globe size={28} />
+              </a>
+              <a 
+                href="https://dhanushkumarsv.blogspot.com" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="p-5 bg-accent/50 dark:bg-zinc-900 border border-border rounded-2xl text-foreground hover:text-primary hover:border-primary/50 transition-all shadow-xl"
+                title="Blog"
+              >
+                <Book size={28} />
               </a>
             </div>
           </motion.div>

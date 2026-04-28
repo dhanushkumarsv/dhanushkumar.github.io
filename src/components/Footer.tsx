@@ -1,4 +1,4 @@
-import { Github, Linkedin, Globe, Mail } from "lucide-react";
+import { Github, Linkedin, Globe, Mail, Book } from "lucide-react";
 
 export default function Footer() {
   return (
@@ -30,13 +30,22 @@ export default function Footer() {
               <Linkedin size={20} />
             </a>
             <a 
-              href="https://dhanushkumar.github.io" 
+              href="https://dhanushkumarsv.github.io" 
               target="_blank" 
               rel="noopener noreferrer"
               className="w-12 h-12 flex items-center justify-center bg-accent/50 dark:bg-zinc-900 border border-border rounded-xl text-muted-foreground hover:text-primary transition-all shadow-lg"
               title="Portfolio"
             >
               <Globe size={20} />
+            </a>
+            <a 
+              href="https://dhanushkumarsv.blogspot.com" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="w-12 h-12 flex items-center justify-center bg-accent/50 dark:bg-zinc-900 border border-border rounded-xl text-muted-foreground hover:text-primary transition-all shadow-lg"
+              title="Blog"
+            >
+              <Book size={20} />
             </a>
             <a 
               href="mailto:dhanushkumar795@gmail.com" 
