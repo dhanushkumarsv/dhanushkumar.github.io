@@ -20,20 +20,16 @@ export default function Hero() {
             Chemical Engineering Graduate
           </span>
           <h1 className="text-5xl md:text-7xl font-heading font-extrabold leading-tight">
-            Engineering <br />
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-blue-300">
-              Sustainable
-            </span>{" "}
-            Processes.
+            Dhanush Kumar S V
           </h1>
+          <h2 className="text-2xl md:text-3xl font-heading font-bold text-gray-400">
+            Process Engineer
+          </h2>
           <p className="text-lg text-gray-500 max-w-lg leading-relaxed">
-            I am Dhanush Kumar S V, specializing in Process Simulation, Integration, and Data Analysis to optimize supply chains and advance green technologies.
+            Process Engineer skilled in process simulation, optimization, and manufacturing improvement. Experienced in using Aspen Plus, Aspen HYSYS, and MATLAB for modeling chemical and semiconductor processes.
           </p>
           <div className="flex gap-4 pt-4">
-            <a href="#projects" className="bg-primary text-primary-foreground px-8 py-3 rounded-lg font-medium hover:opacity-90 transition-opacity">
-              View Projects
-            </a>
-            <a href="#contact" className="glass px-8 py-3 rounded-lg font-medium hover:bg-accent/50 transition-colors">
+            <a href="#contact" className="bg-primary text-primary-foreground px-8 py-3 rounded-lg font-medium hover:opacity-90 transition-opacity">
               Contact Me
             </a>
           </div>

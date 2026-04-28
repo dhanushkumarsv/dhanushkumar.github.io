@@ -61,11 +61,11 @@ const internships = [
 
 export default function Resume() {
   return (
-    <section id="resume" className="py-24 bg-accent/10">
+    <section id="resume" className="py-24 bg-black/40">
       <div className="max-w-6xl mx-auto px-6">
         <div className="text-center mb-16">
           <h2 className="text-4xl font-heading font-bold mb-4">Resume & Experience</h2>
-          <p className="text-gray-500 max-w-2xl mx-auto">
+          <p className="text-gray-400 max-w-2xl mx-auto">
             A timeline of my academic background and professional training in chemical engineering.
           </p>
         </div>
@@ -83,11 +83,11 @@ export default function Resume() {
                   <motion.div 
                     key={i}
                     initial={{ opacity: 0, x: -20 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.1 }}
-                    className="glass-card p-6 rounded-2xl border-l-4 border-l-primary"
+                    className="bg-zinc-900/50 border border-zinc-800 p-6 rounded-2xl border-l-4 border-l-primary"
                   >
                     <div className="flex justify-between items-start mb-2">
                       <h4 className="text-xl font-bold">{edu.school}</h4>
-                      <span className="text-sm px-3 py-1 bg-accent rounded-full text-accent-foreground font-medium whitespace-nowrap ml-4">{edu.date}</span>
+                      <span className="text-sm px-3 py-1 bg-zinc-800 rounded-full text-gray-300 font-medium whitespace-nowrap ml-4">{edu.date}</span>
                     </div>
                     <p className="text-primary font-medium mb-1">{edu.degree}</p>
                     <div className="flex justify-between items-center text-sm text-gray-400 mt-4">
@@ -102,7 +102,7 @@ export default function Resume() {
             <div className="grid sm:grid-cols-2 gap-6">
               <motion.div 
                 initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}
-                className="glass-card p-6 rounded-2xl"
+                className="bg-zinc-900/50 border border-zinc-800 p-6 rounded-2xl"
               >
                 <div className="flex items-center mb-4 text-primary">
                   <BookOpen size={20} className="mr-2" />
@@ -110,11 +110,11 @@ export default function Resume() {
                 </div>
                 <ul className="space-y-4 text-sm text-gray-400">
                   <li className="leading-relaxed">
-                    <span className="text-gray-300 font-medium block">ICATES 2024</span>
+                    <span className="text-gray-200 font-medium block">ICATES 2024</span>
                     "Location Selection and Purification Process Simulation for a Glycerol Plant."
                   </li>
                   <li className="leading-relaxed">
-                    <span className="text-gray-300 font-medium block">ICATES 2023</span>
+                    <span className="text-gray-200 font-medium block">ICATES 2023</span>
                     "Production of Hydrogen Gas Using Photo-catalytic Method."
                   </li>
                 </ul>
@@ -122,7 +122,7 @@ export default function Resume() {
 
               <motion.div 
                 initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.1 }}
-                className="glass-card p-6 rounded-2xl"
+                className="bg-zinc-900/50 border border-zinc-800 p-6 rounded-2xl"
               >
                 <div className="flex items-center mb-4 text-primary">
                   <Languages size={20} className="mr-2" />
@@ -157,7 +157,7 @@ export default function Resume() {
                 <motion.div 
                   key={i}
                   initial={{ opacity: 0, x: 20 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.1 }}
-                  className="glass-card p-8 rounded-2xl relative overflow-hidden group hover:border-primary/50 transition-colors"
+                  className="bg-zinc-900/50 border border-zinc-800 p-8 rounded-2xl relative overflow-hidden group hover:border-primary/50 transition-colors"
                 >
                   <div className="absolute top-0 right-0 w-32 h-32 bg-primary/5 rounded-full blur-[40px] group-hover:bg-primary/10 transition-colors" />
                   <div className="relative z-10">
@@ -166,7 +166,7 @@ export default function Resume() {
                         <h4 className="text-xl font-bold text-gray-100">{intern.role}</h4>
                         <p className="text-primary font-medium mt-1">{intern.company}</p>
                       </div>
-                      <span className="text-sm px-3 py-1 bg-accent/50 rounded-full text-gray-300 whitespace-nowrap">{intern.date}</span>
+                      <span className="text-sm px-3 py-1 bg-zinc-800 rounded-full text-gray-300 whitespace-nowrap">{intern.date}</span>
                     </div>
                     <ul className="space-y-2 mt-6">
                       {intern.points.map((point, j) => (

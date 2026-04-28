@@ -1,7 +1,8 @@
 "use client";
 
-import { motion } from "framer-motion";
-import { ArrowUpRight, Beaker, Factory, Zap } from "lucide-react";
+import { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import { ArrowUpRight, Beaker, Factory, Zap, X, BrainCircuit, Loader2 } from "lucide-react";
 
 const projects = [
   {
@@ -40,12 +41,38 @@ const projects = [
 ];
 
 export default function Projects() {
+  const [selectedProject, setSelectedProject] = useState<typeof projects[0] | null>(null);
+  const [aiAnalysis, setAiAnalysis] = useState<string>("");
+  const [isLoading, setIsLoading] = useState(false);
+
+  const handleOpenProjectAI = async (proj: typeof projects[0]) => {
+    setSelectedProject(proj);
+    setIsLoading(true);
+    setAiAnalysis("");
+
+    try {
+      const res = await fetch("/api/chat", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ 
+          message: `Dhanush worked on a project titled "${proj.title}". Subtitle: "${proj.subtitle}". Detailed points: ${proj.points.join(". ")}. Act as an expert reviewer and explain clearly the objective of this project, the results achieved, and the overall impact of this work.` 
+        })
+      });
+      const data = await res.json();
+      setAiAnalysis(data.reply);
+    } catch (error) {
+      setAiAnalysis("Error connecting to AI. Please ensure GEMINI_API_KEY is set in Vercel.");
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
   return (
-    <section id="projects" className="py-24 bg-accent/5">
+    <section id="projects" className="py-24 bg-black/20 border-y border-zinc-800">
       <div className="max-w-7xl mx-auto px-6">
         <div className="mb-16">
           <h2 className="text-4xl font-heading font-bold mb-4">Research & Projects</h2>
-          <p className="text-gray-500 max-w-2xl">
+          <p className="text-gray-400 max-w-2xl">
             Applying chemical engineering principles and process simulation to solve complex industrial and environmental challenges.
           </p>
         </div>
@@ -58,7 +85,7 @@ export default function Projects() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: i * 0.1 }}
-              className="glass-card p-8 md:p-10 rounded-3xl group hover:border-primary/50 transition-colors"
+              className="bg-zinc-900/40 border border-zinc-800 p-8 md:p-10 rounded-3xl group hover:border-primary/50 transition-colors"
             >
               <div className="flex flex-col md:flex-row gap-8">
                 <div className="flex-shrink-0">
@@ -73,8 +100,11 @@ export default function Projects() {
                       <h3 className="text-2xl font-bold mb-1">{proj.title}</h3>
                       <p className="text-primary font-medium text-sm">{proj.subtitle}</p>
                     </div>
-                    <button className="hidden md:flex items-center text-sm font-semibold text-gray-500 hover:text-primary transition-colors">
-                      Details <ArrowUpRight size={16} className="ml-1" />
+                    <button 
+                      onClick={() => handleOpenProjectAI(proj)}
+                      className="hidden md:flex items-center text-sm font-semibold text-gray-500 hover:text-primary transition-colors group/btn"
+                    >
+                      AI Analysis <ArrowUpRight size={16} className="ml-1 group-hover/btn:-translate-y-0.5 group-hover/btn:translate-x-0.5 transition-transform" />
                     </button>
                   </div>
                   
@@ -86,12 +116,67 @@ export default function Projects() {
                       </li>
                     ))}
                   </ul>
+
+                  <button 
+                    onClick={() => handleOpenProjectAI(proj)}
+                    className="mt-6 md:hidden flex items-center text-sm font-semibold text-primary hover:underline"
+                  >
+                    View AI Analysis
+                  </button>
                 </div>
               </div>
             </motion.div>
           ))}
         </div>
       </div>
+
+      <AnimatePresence>
+        {selectedProject && (
+          <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
+            <motion.div 
+              initial={{ opacity: 0 }} 
+              animate={{ opacity: 1 }} 
+              exit={{ opacity: 0 }}
+              onClick={() => setSelectedProject(null)}
+              className="absolute inset-0 bg-black/80 backdrop-blur-md" 
+            />
+            <motion.div
+              initial={{ opacity: 0, scale: 0.95, y: 20 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              exit={{ opacity: 0, scale: 0.95, y: 20 }}
+              className="relative w-full max-w-2xl bg-zinc-900 border border-zinc-800 rounded-3xl p-8 md:p-10 shadow-2xl z-10 max-h-[90vh] overflow-y-auto"
+            >
+              <button 
+                onClick={() => setSelectedProject(null)}
+                className="absolute top-6 right-6 p-2 rounded-full hover:bg-zinc-800 transition-colors"
+              >
+                <X size={20} />
+              </button>
+              
+              <div className="flex items-center mb-6 text-primary">
+                <BrainCircuit size={28} className="mr-3" />
+                <h3 className="text-2xl font-heading font-bold">Project Analysis</h3>
+              </div>
+              
+              <h4 className="text-xl font-bold mb-1 text-white">{selectedProject.title}</h4>
+              <p className="text-primary text-sm font-medium mb-6">{selectedProject.subtitle}</p>
+              
+              <div className="text-gray-300 min-h-[150px] leading-relaxed">
+                {isLoading ? (
+                  <div className="flex flex-col items-center justify-center py-12">
+                    <Loader2 size={40} className="animate-spin text-primary mb-4" />
+                    <p className="text-sm animate-pulse">AI is analyzing research data...</p>
+                  </div>
+                ) : (
+                  <div className="prose prose-invert max-w-none">
+                    <p>{aiAnalysis}</p>
+                  </div>
+                )}
+              </div>
+            </motion.div>
+          </div>
+        )}
+      </AnimatePresence>
     </section>
   );
 }
