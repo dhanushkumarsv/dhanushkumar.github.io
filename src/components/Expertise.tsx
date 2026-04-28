@@ -1,3 +1,32 @@
+"use client";
+
+import { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import { Laptop, Cpu, LineChart, FileText, BrainCircuit, X, Loader2 } from "lucide-react";
+
+const skillCategories = [
+  {
+    title: "Process Simulation",
+    icon: Laptop,
+    skills: ["Aspen Plus", "Aspen HYSYS", "MATLAB", "GAMS"]
+  },
+  {
+    title: "Process Integration",
+    icon: Cpu,
+    skills: ["Electrochemical coating", "Surface process modeling", "Yield optimization"]
+  },
+  {
+    title: "Data Analysis",
+    icon: LineChart,
+    skills: ["Origin", "Excel", "ImageJ", "Python (basic)"]
+  },
+  {
+    title: "Documentation",
+    icon: FileText,
+    skills: ["Process flow reports", "Design of experiments", "Technical writing"]
+  }
+];
+
 export default function Expertise() {
   const [selectedSkill, setSelectedSkill] = useState<string | null>(null);
   const [aiExplanation, setAiExplanation] = useState<string>("");
