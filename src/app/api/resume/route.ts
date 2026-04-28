@@ -1,13 +1,12 @@
 import { NextResponse } from "next/server";
-import { GoogleGenAI } from "@google/genai";
+import { GoogleGenerativeAI } from "@google/generative-ai";
 
 export async function POST(req: Request) {
   try {
     const { role } = await req.json();
 
-    const ai = new GoogleGenAI({});
-
-    const prompt = `
+    const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY || "");
+    const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
       You are an expert resume writer. Dhanush Kumar S V is applying for a "${role}" role.
       Dhanush is a Chemical Engineering Graduate Student.
       His core skills: Aspen Plus, GAMS, Optimization, Supply Chain, Wastewater Treatment, Hydrogen Systems.
@@ -24,13 +23,12 @@ export async function POST(req: Request) {
       Do not include any markdown formatting, backticks, or other text outside the JSON object.
     `;
 
-    const response = await ai.models.generateContent({
-      model: "gemini-2.5-flash",
-      contents: prompt,
-    });
-
-    const responseText = response.text || "";
-    const jsonText = responseText.replace(/```json/g, "").replace(/```/g, "").trim();
+    const result = await model.generateContent(prompt);
+    const responseText = result.response.text();
+    
+    // Attempt to extract JSON if the AI returned it inside markdown blocks
+    const jsonMatch = responseText.match(/\{[\s\S]*\}/);
+    const jsonText = jsonMatch ? jsonMatch[0] : responseText;
     const resumeData = JSON.parse(jsonText);
 
     return NextResponse.json({ 
