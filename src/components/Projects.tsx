@@ -1,80 +1,92 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { ArrowUpRight } from "lucide-react";
+import { ArrowUpRight, Beaker, Factory, Zap } from "lucide-react";
 
 const projects = [
   {
-    id: "green-hydrogen",
-    title: "Green Hydrogen Supply Chain",
-    tags: ["Optimization", "Supply Chain", "Sustainability"],
-    desc: "A comprehensive model optimizing the production, storage, and distribution of green hydrogen from renewable sources.",
+    id: "vmd-med",
+    title: "Hybrid VMD-MED / MSF-MED Process Modeling",
+    subtitle: "Phosphogypsum Wastewater Treatment",
+    icon: Beaker,
+    points: [
+      "Modeled hybrid VMD-MED and MSF-MED systems for phosphogypsum wastewater purification using process simulation.",
+      "Integrated microbial electrochemical cell (MEC) for enhanced phosphorus recovery and energy-efficient treatment.",
+      "Performed process optimization and energy analysis to improve water recovery, phosphorus yield, and overall system efficiency."
+    ]
   },
   {
-    id: "phosphoric-acid",
-    title: "Phosphoric Acid Removal",
-    tags: ["Wastewater", "Chemical Process"],
-    desc: "Simulation and experimental validation of efficient phosphoric acid extraction from industrial wastewater streams.",
+    id: "gams-optimization",
+    title: "MILP-Based Optimization of Cooperative Dairy Milk Supply Chain",
+    subtitle: "Supply Chain Integration",
+    icon: Factory,
+    points: [
+      "Formulated a GAMS-based MILP model for integrated village-BMC-plant milk procurement under capacity, flow balance, and service constraints.",
+      "Conducted sensitivity and scenario analyses on BMC capacity and penalty parameters to evaluate cost-service trade-offs.",
+      "Achieved ~17% total cost reduction, up to ~30% decrease in unserved milk, and identified key capacity thresholds."
+    ]
   },
   {
-    id: "membrane",
-    title: "Membrane Distillation",
-    tags: ["VMD-MED", "Simulation", "Aspen Plus"],
-    desc: "Hybrid VMD-MED modeling to maximize freshwater recovery while minimizing specific thermal energy consumption.",
-  },
-  {
-    id: "biological",
-    title: "Biological Phosphorus Removal",
-    tags: ["MEC", "Integration"],
-    desc: "Integrating Microbial Electrochemical Cells (MEC) into traditional treatment plants for enhanced phosphorus recovery.",
-  },
+    id: "hydrogen-production",
+    title: "Hydrogen Production using the Photocatalytic Method",
+    subtitle: "Sustainable Energy Generation",
+    icon: Zap,
+    points: [
+      "Designed and built a 4 L trapezoidal photocatalytic reactor for solar-driven hydrogen production from sulphuric wastewater.",
+      "Achieved ~300 mL h-1 L-1 hydrogen production using TiO2 photocatalyst under direct sunlight.",
+      "Optimized catalyst loading and sulphide concentration to maximize hydrogen yield and process efficiency."
+    ]
+  }
 ];
 
 export default function Projects() {
   return (
-    <section id="projects" className="py-24 bg-accent/20 border-y border-border">
+    <section id="projects" className="py-24 bg-accent/5">
       <div className="max-w-7xl mx-auto px-6">
-        <div className="flex flex-col md:flex-row justify-between items-end mb-16 gap-6">
-          <div>
-            <h2 className="text-4xl font-heading font-bold mb-4">Featured Projects</h2>
-            <p className="text-gray-500 max-w-xl">
-              Applying chemical engineering principles and process simulation to solve complex industrial and environmental challenges.
-            </p>
-          </div>
-          <button className="text-primary font-medium flex items-center hover:opacity-80 transition-opacity">
-            View All Research <ArrowUpRight size={20} className="ml-1" />
-          </button>
+        <div className="mb-16">
+          <h2 className="text-4xl font-heading font-bold mb-4">Research & Projects</h2>
+          <p className="text-gray-500 max-w-2xl">
+            Applying chemical engineering principles and process simulation to solve complex industrial and environmental challenges.
+          </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <div className="space-y-8">
           {projects.map((proj, i) => (
             <motion.div
               key={proj.id}
-              initial={{ opacity: 0, y: 30 }}
+              initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ delay: i * 0.15 }}
-              className="group relative glass-card p-8 rounded-3xl overflow-hidden"
+              transition={{ delay: i * 0.1 }}
+              className="glass-card p-8 md:p-10 rounded-3xl group hover:border-primary/50 transition-colors"
             >
-              <div className="absolute top-0 right-0 p-8 opacity-0 translate-y-4 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300">
-                <button className="bg-primary text-primary-foreground p-3 rounded-full shadow-lg">
-                  <ArrowUpRight size={24} />
-                </button>
-              </div>
-              
-              <div className="flex flex-wrap gap-2 mb-6">
-                {proj.tags.map(tag => (
-                  <span key={tag} className="px-3 py-1 text-xs font-medium bg-background rounded-full border border-border">
-                    {tag}
-                  </span>
-                ))}
-              </div>
-              
-              <h3 className="text-2xl font-bold mb-4 pr-12">{proj.title}</h3>
-              <p className="text-gray-500 leading-relaxed mb-6">{proj.desc}</p>
-              
-              <div className="inline-flex items-center text-sm font-medium text-primary cursor-pointer hover:underline">
-                Read Case Study
+              <div className="flex flex-col md:flex-row gap-8">
+                <div className="flex-shrink-0">
+                  <div className="p-4 bg-primary/10 text-primary rounded-2xl group-hover:scale-110 transition-transform">
+                    <proj.icon size={32} />
+                  </div>
+                </div>
+                
+                <div className="flex-grow">
+                  <div className="flex flex-col md:flex-row justify-between items-start gap-4 mb-4">
+                    <div>
+                      <h3 className="text-2xl font-bold mb-1">{proj.title}</h3>
+                      <p className="text-primary font-medium text-sm">{proj.subtitle}</p>
+                    </div>
+                    <button className="hidden md:flex items-center text-sm font-semibold text-gray-500 hover:text-primary transition-colors">
+                      Details <ArrowUpRight size={16} className="ml-1" />
+                    </button>
+                  </div>
+                  
+                  <ul className="space-y-3">
+                    {proj.points.map((point, j) => (
+                      <li key={j} className="text-gray-400 text-sm md:text-base leading-relaxed flex items-start">
+                        <span className="text-primary mr-3 mt-1.5 w-1.5 h-1.5 rounded-full flex-shrink-0 bg-primary" />
+                        {point}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
               </div>
             </motion.div>
           ))}

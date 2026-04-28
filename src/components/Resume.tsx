@@ -1,151 +1,187 @@
 "use client";
 
-import { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
-import { ChevronDown, FileText, Sparkles, Loader2, Download } from "lucide-react";
+import { motion } from "framer-motion";
+import { GraduationCap, Briefcase, BookOpen, Languages } from "lucide-react";
 
-const roles = [
-  "Process Engineer",
-  "Chemical Engineer",
-  "Supply Chain Analyst",
-  "Research Assistant"
+const education = [
+  {
+    degree: "M.S. in Chemical Engineering",
+    school: "National Chung Hsing University",
+    location: "Taichung, Taiwan",
+    date: "2024 - Present",
+    gpa: "GPA: 3.95/4.3"
+  },
+  {
+    degree: "B.Tech in Chemical Engineering",
+    school: "Anna University",
+    location: "Chennai, India",
+    date: "2019 - 2023",
+    gpa: "GPA: 7.84/10"
+  }
 ];
 
-interface TailoredResume {
-  title: string;
-  summary: string;
-  skills: string[];
-}
+const internships = [
+  {
+    role: "University Teaching Assistant",
+    company: "National Chung Hsing University, Taiwan",
+    date: "Sep 2025 - Dec 2025",
+    points: [
+      "Guided students in process simulation using Aspen Plus, troubleshooting modeling and convergence issues.",
+      "Supported design and optimization of chemical processes through hands-on simulation exercises.",
+      "Assisted in teaching optimization concepts using GAMS, including constraints and objective functions."
+    ]
+  },
+  {
+    role: "Quality Assurance Trainee",
+    company: "Steel Authority of India Limited (SAIL), Salem",
+    date: "Oct 2022 - Nov 2022",
+    points: [
+      "Analyzed production data from hot and cold rolling lines to identify factors affecting steel yield and quality.",
+      "Investigated manufacturing defects and contributed to root cause analysis for process improvement."
+    ]
+  },
+  {
+    role: "CFD Research Intern",
+    company: "Indian Institute of Technology, Indore",
+    date: "Nov 2021 - Jan 2022",
+    points: [
+      "Performed computational fluid dynamics analysis for chemical processes, learning parameter optimization and reporting techniques."
+    ]
+  },
+  {
+    role: "Surface Coating Intern",
+    company: "RK Metals",
+    date: "Aug 2021",
+    points: [
+      "Studied electrochemical coating and metallization methods used in industrial surface treatment.",
+      "Evaluated coating performance factors including thickness, adhesion, and corrosion resistance."
+    ]
+  }
+];
 
 export default function Resume() {
-  const [isOpen, setIsOpen] = useState(false);
-  const [selectedRole, setSelectedRole] = useState(roles[0]);
-  const [isGenerating, setIsGenerating] = useState(false);
-  const [resumeData, setResumeData] = useState<TailoredResume | null>(null);
-
-  const handleGenerate = async () => {
-    setIsGenerating(true);
-    setResumeData(null);
-    try {
-      const res = await fetch("/api/resume", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ role: selectedRole })
-      });
-      const data = await res.json();
-      if (data.success) setResumeData(data.resumeData);
-    } catch (error) {
-      console.error(error);
-    } finally {
-      setIsGenerating(false);
-    }
-  };
-
   return (
-    <section id="resume" className="py-24">
-      <div className="max-w-4xl mx-auto px-6 text-center">
-        <motion.div
-          initial={{ opacity: 0, scale: 0.95 }}
-          whileInView={{ opacity: 1, scale: 1 }}
-          viewport={{ once: true }}
-          className="glass-card rounded-3xl p-10 md:p-16 relative overflow-hidden"
-        >
-          {/* Decorative background glow */}
-          <div className="absolute top-0 right-0 -mr-20 -mt-20 w-64 h-64 bg-primary/20 rounded-full blur-[80px] -z-10" />
-          <div className="absolute bottom-0 left-0 -ml-20 -mb-20 w-64 h-64 bg-blue-500/20 rounded-full blur-[80px] -z-10" />
-
-          <div className="inline-flex items-center justify-center p-4 bg-background rounded-full mb-8 shadow-inner">
-            <FileText size={32} className="text-primary" />
-          </div>
-
-          <h2 className="text-3xl md:text-5xl font-heading font-bold mb-6">
-            AI-Tailored Resume
-          </h2>
-          <p className="text-gray-500 mb-10 max-w-xl mx-auto text-lg">
-            Select a target role below. The AI will dynamically rebuild my resume, emphasizing the most relevant skills, projects, and experiences for that specific position.
+    <section id="resume" className="py-24 bg-accent/10">
+      <div className="max-w-6xl mx-auto px-6">
+        <div className="text-center mb-16">
+          <h2 className="text-4xl font-heading font-bold mb-4">Resume & Experience</h2>
+          <p className="text-gray-500 max-w-2xl mx-auto">
+            A timeline of my academic background and professional training in chemical engineering.
           </p>
+        </div>
 
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-4 relative z-20">
-            {/* Custom Dropdown */}
-            <div className="relative w-full sm:w-64">
-              <button 
-                onClick={() => setIsOpen(!isOpen)}
-                className="w-full flex items-center justify-between bg-background border border-border px-4 py-3 rounded-xl font-medium focus:outline-none focus:ring-2 focus:ring-primary/50 transition-all"
-              >
-                <span>{selectedRole}</span>
-                <ChevronDown size={18} className={`transition-transform duration-200 ${isOpen ? "rotate-180" : ""}`} />
-              </button>
-              
-              <AnimatePresence>
-                {isOpen && (
+        <div className="grid lg:grid-cols-2 gap-12">
+          {/* Left Column: Education & Misc */}
+          <div className="space-y-12">
+            <div>
+              <div className="flex items-center mb-8">
+                <GraduationCap size={28} className="text-primary mr-4" />
+                <h3 className="text-3xl font-heading font-bold">Education</h3>
+              </div>
+              <div className="space-y-6">
+                {education.map((edu, i) => (
                   <motion.div 
-                    initial={{ opacity: 0, y: -10 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -10 }}
-                    className="absolute top-full left-0 w-full mt-2 bg-background border border-border rounded-xl shadow-xl overflow-hidden"
+                    key={i}
+                    initial={{ opacity: 0, x: -20 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.1 }}
+                    className="glass-card p-6 rounded-2xl border-l-4 border-l-primary"
                   >
-                    {roles.map(role => (
-                      <button
-                        key={role}
-                        onClick={() => {
-                          setSelectedRole(role);
-                          setIsOpen(false);
-                        }}
-                        className="w-full text-left px-4 py-3 hover:bg-accent transition-colors font-medium border-b border-border/50 last:border-0"
-                      >
-                        {role}
-                      </button>
-                    ))}
+                    <div className="flex justify-between items-start mb-2">
+                      <h4 className="text-xl font-bold">{edu.school}</h4>
+                      <span className="text-sm px-3 py-1 bg-accent rounded-full text-accent-foreground font-medium whitespace-nowrap ml-4">{edu.date}</span>
+                    </div>
+                    <p className="text-primary font-medium mb-1">{edu.degree}</p>
+                    <div className="flex justify-between items-center text-sm text-gray-400 mt-4">
+                      <span>{edu.location}</span>
+                      <span className="font-semibold text-gray-300">{edu.gpa}</span>
+                    </div>
                   </motion.div>
-                )}
-              </AnimatePresence>
+                ))}
+              </div>
             </div>
 
-            <button 
-              onClick={handleGenerate}
-              disabled={isGenerating}
-              className="w-full sm:w-auto flex items-center justify-center bg-primary text-primary-foreground px-8 py-3 rounded-xl font-medium hover:opacity-90 transition-opacity disabled:opacity-50 group"
-            >
-              {isGenerating ? <Loader2 size={18} className="mr-2 animate-spin" /> : <Sparkles size={18} className="mr-2 group-hover:animate-pulse" />}
-              {isGenerating ? "Generating..." : "Generate"}
-            </button>
-          </div>
-          
-          <div className="mt-8 text-sm text-gray-400 flex items-center justify-center">
-            <span>Powered by Gemini API</span>
-          </div>
-
-          {/* Generated Resume Output */}
-          <AnimatePresence>
-            {resumeData && (
-              <motion.div
-                initial={{ opacity: 0, height: 0 }}
-                animate={{ opacity: 1, height: "auto" }}
-                className="mt-12 text-left bg-background/80 rounded-2xl p-8 border border-border shadow-inner"
+            <div className="grid sm:grid-cols-2 gap-6">
+              <motion.div 
+                initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}
+                className="glass-card p-6 rounded-2xl"
               >
-                <div className="flex justify-between items-start mb-6">
-                  <div>
-                    <h3 className="text-2xl font-bold font-heading text-primary mb-1">{resumeData.title}</h3>
-                    <p className="text-sm text-gray-400">Dhanush Kumar S V</p>
-                  </div>
-                  <button className="p-2 bg-accent rounded-full hover:bg-border transition-colors">
-                    <Download size={18} />
-                  </button>
+                <div className="flex items-center mb-4 text-primary">
+                  <BookOpen size={20} className="mr-2" />
+                  <h4 className="font-bold">Publications</h4>
                 </div>
-                
-                <p className="text-gray-300 leading-relaxed mb-6">{resumeData.summary}</p>
-                
-                <h4 className="font-semibold mb-3">Key Targeted Skills:</h4>
-                <ul className="grid grid-cols-2 gap-3">
-                  {resumeData.skills.map((skill, i) => (
-                    <li key={i} className="flex items-center text-sm text-gray-400 before:content-[''] before:w-1.5 before:h-1.5 before:bg-primary before:rounded-full before:mr-2">
-                      {skill}
-                    </li>
-                  ))}
+                <ul className="space-y-4 text-sm text-gray-400">
+                  <li className="leading-relaxed">
+                    <span className="text-gray-300 font-medium block">ICATES 2024</span>
+                    "Location Selection and Purification Process Simulation for a Glycerol Plant."
+                  </li>
+                  <li className="leading-relaxed">
+                    <span className="text-gray-300 font-medium block">ICATES 2023</span>
+                    "Production of Hydrogen Gas Using Photo-catalytic Method."
+                  </li>
                 </ul>
               </motion.div>
-            )}
-          </AnimatePresence>
 
-        </motion.div>
+              <motion.div 
+                initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.1 }}
+                className="glass-card p-6 rounded-2xl"
+              >
+                <div className="flex items-center mb-4 text-primary">
+                  <Languages size={20} className="mr-2" />
+                  <h4 className="font-bold">Languages</h4>
+                </div>
+                <ul className="space-y-3">
+                  <li className="flex justify-between text-sm">
+                    <span className="text-gray-300">English</span>
+                    <span className="text-gray-500">Fluent</span>
+                  </li>
+                  <li className="flex justify-between text-sm">
+                    <span className="text-gray-300">Tamil</span>
+                    <span className="text-gray-500">Native</span>
+                  </li>
+                  <li className="flex justify-between text-sm">
+                    <span className="text-gray-300">Chinese</span>
+                    <span className="text-gray-500">Basic</span>
+                  </li>
+                </ul>
+              </motion.div>
+            </div>
+          </div>
+
+          {/* Right Column: Internships */}
+          <div>
+            <div className="flex items-center mb-8">
+              <Briefcase size={28} className="text-primary mr-4" />
+              <h3 className="text-3xl font-heading font-bold">Internships</h3>
+            </div>
+            <div className="space-y-6">
+              {internships.map((intern, i) => (
+                <motion.div 
+                  key={i}
+                  initial={{ opacity: 0, x: 20 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.1 }}
+                  className="glass-card p-8 rounded-2xl relative overflow-hidden group hover:border-primary/50 transition-colors"
+                >
+                  <div className="absolute top-0 right-0 w-32 h-32 bg-primary/5 rounded-full blur-[40px] group-hover:bg-primary/10 transition-colors" />
+                  <div className="relative z-10">
+                    <div className="flex flex-wrap justify-between items-start gap-4 mb-4">
+                      <div>
+                        <h4 className="text-xl font-bold text-gray-100">{intern.role}</h4>
+                        <p className="text-primary font-medium mt-1">{intern.company}</p>
+                      </div>
+                      <span className="text-sm px-3 py-1 bg-accent/50 rounded-full text-gray-300 whitespace-nowrap">{intern.date}</span>
+                    </div>
+                    <ul className="space-y-2 mt-6">
+                      {intern.points.map((point, j) => (
+                        <li key={j} className="text-gray-400 text-sm leading-relaxed flex items-start">
+                          <span className="text-primary mr-2 mt-1">•</span>
+                          {point}
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                </motion.div>
+              ))}
+            </div>
+          </div>
+        </div>
       </div>
     </section>
   );
