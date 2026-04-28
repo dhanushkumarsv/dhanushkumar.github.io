@@ -68,12 +68,12 @@ export default function Projects() {
   };
 
   return (
-    <section id="projects" className="py-24 bg-black relative border-b border-zinc-900">
+    <section id="projects" className="py-24 bg-background relative border-b border-border">
       <div className="max-w-7xl mx-auto px-6">
         <div className="mb-20">
-          <h2 className="text-4xl md:text-5xl font-heading font-bold mb-6 text-white text-center">Research & Projects</h2>
+          <h2 className="text-4xl md:text-5xl font-heading font-bold mb-6 text-foreground text-center">Research & Projects</h2>
           <div className="w-20 h-1 bg-primary mx-auto mb-6 rounded-full" />
-          <p className="text-zinc-400 max-w-2xl mx-auto text-lg text-center leading-relaxed">
+          <p className="text-muted-foreground max-w-2xl mx-auto text-lg text-center leading-relaxed">
             A selection of my core research initiatives, combining experimental validation with advanced process simulation.
           </p>
         </div>
@@ -86,13 +86,13 @@ export default function Projects() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: i * 0.1 }}
-              className="bg-zinc-900/30 border border-zinc-800 p-8 md:p-12 rounded-[2.5rem] group hover:bg-zinc-900/50 transition-all duration-500 relative overflow-hidden"
+              className="bg-accent/30 dark:bg-zinc-900/30 border border-border p-8 md:p-12 rounded-[2.5rem] group hover:bg-accent/50 dark:hover:bg-zinc-900/50 transition-all duration-500 relative overflow-hidden"
             >
               <div className="absolute top-0 right-0 w-64 h-64 bg-primary/5 blur-[80px] rounded-full -mr-32 -mt-32" />
               
               <div className="flex flex-col lg:flex-row gap-12 relative z-10">
                 <div className="flex-shrink-0">
-                  <div className="w-16 h-16 md:w-20 md:h-20 bg-zinc-800 text-primary rounded-2xl flex items-center justify-center group-hover:bg-primary group-hover:text-white transition-all duration-500 shadow-xl">
+                  <div className="w-16 h-16 md:w-20 md:h-20 bg-background dark:bg-zinc-800 text-primary rounded-2xl flex items-center justify-center group-hover:bg-primary group-hover:text-white transition-all duration-500 shadow-xl shadow-black/5 dark:shadow-black/20">
                     <proj.icon size={32} />
                   </div>
                 </div>
@@ -100,12 +100,12 @@ export default function Projects() {
                 <div className="flex-grow">
                   <div className="flex flex-col md:flex-row justify-between items-start gap-6 mb-8">
                     <div>
-                      <h3 className="text-2xl md:text-3xl font-bold text-white mb-2 tracking-tight group-hover:text-primary transition-colors">{proj.title}</h3>
-                      <p className="text-zinc-500 font-medium text-lg">{proj.subtitle}</p>
+                      <h3 className="text-2xl md:text-3xl font-bold text-foreground mb-2 tracking-tight group-hover:text-primary transition-colors">{proj.title}</h3>
+                      <p className="text-muted-foreground font-medium text-lg">{proj.subtitle}</p>
                     </div>
                     <button 
                       onClick={() => handleOpenProjectAI(proj)}
-                      className="inline-flex items-center px-6 py-3 bg-white text-black rounded-xl text-sm font-bold hover:bg-primary hover:text-white transition-all shadow-lg"
+                      className="inline-flex items-center px-6 py-3 bg-primary text-primary-foreground dark:bg-white dark:text-black rounded-xl text-sm font-bold hover:opacity-90 transition-all shadow-lg"
                     >
                       AI Analysis <ArrowUpRight size={18} className="ml-2" />
                     </button>
@@ -113,7 +113,7 @@ export default function Projects() {
                   
                   <div className="grid md:grid-cols-1 gap-4">
                     {proj.points.map((point, j) => (
-                      <div key={j} className="flex items-start text-zinc-400 text-base md:text-lg leading-relaxed">
+                      <div key={j} className="flex items-start text-muted-foreground text-base md:text-lg leading-relaxed">
                         <div className="mt-2.5 w-1.5 h-1.5 rounded-full bg-primary mr-4 flex-shrink-0" />
                         <p>{point}</p>
                       </div>
@@ -134,17 +134,17 @@ export default function Projects() {
               animate={{ opacity: 1 }} 
               exit={{ opacity: 0 }}
               onClick={() => setSelectedProject(null)}
-              className="absolute inset-0 bg-black/95 backdrop-blur-2xl" 
+              className="absolute inset-0 bg-black/60 dark:bg-black/95 backdrop-blur-2xl" 
             />
             <motion.div
               initial={{ opacity: 0, scale: 0.95, y: 30 }}
               animate={{ opacity: 1, scale: 1, y: 0 }}
               exit={{ opacity: 0, scale: 0.95, y: 30 }}
-              className="relative w-full max-w-3xl bg-zinc-900 border border-zinc-800 rounded-[3rem] p-10 md:p-14 shadow-2xl z-10 max-h-[90vh] overflow-y-auto custom-scrollbar"
+              className="relative w-full max-w-3xl bg-background dark:bg-zinc-900 border border-border rounded-[3rem] p-10 md:p-14 shadow-2xl z-10 max-h-[90vh] overflow-y-auto custom-scrollbar"
             >
               <button 
                 onClick={() => setSelectedProject(null)}
-                className="absolute top-10 right-10 p-3 rounded-full bg-zinc-800 text-zinc-400 hover:text-white transition-colors"
+                className="absolute top-10 right-10 p-3 rounded-full bg-accent dark:bg-zinc-800 text-muted-foreground hover:text-foreground transition-colors"
               >
                 <X size={24} />
               </button>
@@ -154,28 +154,28 @@ export default function Projects() {
                   <BrainCircuit size={32} className="mr-3" />
                   <span className="text-sm font-black uppercase tracking-[0.3em]">AI Research Review</span>
                 </div>
-                <h4 className="text-3xl font-bold text-white mb-2 leading-tight tracking-tight">{selectedProject.title}</h4>
-                <p className="text-zinc-500 text-lg font-medium">{selectedProject.subtitle}</p>
+                <h4 className="text-3xl font-bold text-foreground mb-2 leading-tight tracking-tight">{selectedProject.title}</h4>
+                <p className="text-muted-foreground text-lg font-medium">{selectedProject.subtitle}</p>
               </div>
               
-              <div className="text-zinc-300 text-lg leading-relaxed space-y-6">
+              <div className="text-foreground dark:text-zinc-300 text-lg leading-relaxed space-y-6">
                 {isLoading ? (
                   <div className="flex flex-col items-center justify-center py-16">
                     <Loader2 size={48} className="animate-spin text-primary mb-6" />
-                    <p className="text-sm font-bold text-zinc-500 animate-pulse uppercase tracking-[0.2em]">Deep Learning Analysis in Progress...</p>
+                    <p className="text-sm font-bold text-muted-foreground animate-pulse uppercase tracking-[0.2em]">Deep Learning Analysis in Progress...</p>
                   </div>
                 ) : (
-                  <div className="prose prose-invert prose-lg max-w-none">
+                  <div className="prose dark:prose-invert prose-lg max-w-none">
                     <p>{aiAnalysis}</p>
                   </div>
                 )}
               </div>
 
-              <div className="mt-12 pt-8 border-t border-zinc-800 flex justify-between items-center">
-                <p className="text-xs text-zinc-600 font-medium italic">Analyzed by Gemini Pro v2.0</p>
+              <div className="mt-12 pt-8 border-t border-border flex justify-between items-center">
+                <p className="text-xs text-muted-foreground font-medium italic">Analyzed by Gemini Pro v2.0</p>
                 <button 
                   onClick={() => setSelectedProject(null)}
-                  className="px-10 py-4 bg-primary text-white rounded-2xl font-bold hover:bg-blue-600 transition-all shadow-xl shadow-primary/20"
+                  className="px-10 py-4 bg-primary text-primary-foreground rounded-2xl font-bold hover:opacity-90 transition-all shadow-xl shadow-primary/20"
                 >
                   Close Detailed View
                 </button>
