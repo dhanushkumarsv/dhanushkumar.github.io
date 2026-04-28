@@ -1,3 +1,5 @@
+import { Github, Linkedin, Globe, Mail } from "lucide-react";
+
 export default function Footer() {
   return (
     <footer className="py-16 bg-background border-t border-border">
