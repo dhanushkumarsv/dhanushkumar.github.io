@@ -29,7 +29,8 @@ export async function POST(req: Request) {
       contents: prompt,
     });
 
-    const jsonText = response.text.replace(/```json/g, "").replace(/```/g, "").trim();
+    const responseText = response.text || "";
+    const jsonText = responseText.replace(/```json/g, "").replace(/```/g, "").trim();
     const resumeData = JSON.parse(jsonText);
 
     return NextResponse.json({ 

@@ -32,7 +32,7 @@ export async function POST(req: Request) {
     });
 
     return NextResponse.json({ 
-      reply: response.text 
+      reply: response.text || "I'm sorry, I couldn't generate a response."
     });
 
   } catch (error) {
