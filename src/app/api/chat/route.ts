@@ -56,9 +56,10 @@ export async function POST(req: Request) {
       Focus entirely on Dhanush's professional achievements.
     `;
 
-    // Try a direct REST API call instead of using the SDK to bypass any SDK versioning bugs
-    const model = "gemini-1.5-flash";
-    const url = `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${apiKey}`;
+    // Try multiple models directly to find one your key has access to
+    const modelsToTry = ["gemini-1.5-flash", "gemini-1.5-pro", "gemini-1.0-pro", "gemini-pro"];
+    let responseText = "";
+    let lastError = "";
 
     const payload = {
       system_instruction: {
@@ -72,26 +73,39 @@ export async function POST(req: Request) {
       ]
     };
 
-    const response = await fetch(url, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify(payload)
-    });
+    for (const model of modelsToTry) {
+      try {
+        const url = `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${apiKey}`;
+        
+        // Remove system_instruction for gemini-pro as it doesn't support it in v1beta
+        const currentPayload = model === "gemini-pro" ? { contents: payload.contents } : payload;
 
-    const data = await response.json();
+        const response = await fetch(url, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify(currentPayload)
+        });
 
-    if (!response.ok) {
-      console.error("Gemini Direct API Error:", data);
-      throw new Error(data.error?.message || `HTTP ${response.status}: ${response.statusText}`);
+        const data = await response.json();
+
+        if (response.ok && data.candidates?.[0]?.content?.parts?.[0]?.text) {
+          responseText = data.candidates[0].content.parts[0].text;
+          break; // Success!
+        } else {
+          lastError = data.error?.message || "Unknown error";
+          console.warn(`Model ${model} failed:`, lastError);
+        }
+      } catch (err: any) {
+        lastError = err.message;
+        console.warn(`Model ${model} request failed:`, lastError);
+      }
     }
-
-    const responseText = data.candidates?.[0]?.content?.parts?.[0]?.text;
 
     if (!responseText) {
       return NextResponse.json({ 
-        reply: `❌ AI API ERROR: Received empty response from Google.` 
+        reply: `❌ YOUR API KEY RESTRICTION: Your Google API Key does not have access to any Gemini models. \n\nReason from Google: ${lastError}\n\nFix: Go to aistudio.google.com and generate a NEW key.` 
       });
     }
 
