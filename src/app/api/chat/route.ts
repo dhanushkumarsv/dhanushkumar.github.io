@@ -14,8 +14,7 @@ export async function POST(req: Request) {
 
     // Initialize the SDK
     const genAI = new GoogleGenerativeAI(apiKey);
-    const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
-
+    
     // The system prompt to feed context to the AI
     const systemInstruction = `
       You are the personal AI assistant for Dhanush Kumar S V's portfolio.
@@ -57,10 +56,28 @@ export async function POST(req: Request) {
       Focus entirely on Dhanush's professional achievements.
     `;
 
-    const result = await model.generateContent({
-      contents: [{ role: "user", parts: [{ text: `System Instruction: ${systemInstruction}\n\nUser Question: ${message}` }] }]
-    });
-    const responseText = result.response.text();
+    let responseText = "";
+    
+    try {
+      // Try gemini-1.5-flash first
+      const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
+      const result = await model.generateContent({
+        contents: [{ role: "user", parts: [{ text: `System Instruction: ${systemInstruction}\n\nUser Question: ${message}` }] }]
+      });
+      responseText = result.response.text();
+    } catch (flashError) {
+      console.warn("Flash model failed, falling back to gemini-pro", flashError);
+      try {
+        // Fallback to gemini-pro
+        const model = genAI.getGenerativeModel({ model: "gemini-pro" });
+        const result = await model.generateContent({
+          contents: [{ role: "user", parts: [{ text: `System Instruction: ${systemInstruction}\n\nUser Question: ${message}` }] }]
+        });
+        responseText = result.response.text();
+      } catch (proError: any) {
+        throw new Error(`AI processing failed on all models: ${proError.message}`);
+      }
+    }
 
     return NextResponse.json({ 
       reply: responseText || "I'm sorry, I couldn't generate a response."
