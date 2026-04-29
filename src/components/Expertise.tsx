@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Laptop, Cpu, LineChart, FileText, BrainCircuit, X, Loader2 } from "lucide-react";
+import { Laptop, Cpu, LineChart, FileText, BrainCircuit, X, Loader2, MapPin } from "lucide-react";
 
 const skillCategories = [
   {
