@@ -56,37 +56,51 @@ export async function POST(req: Request) {
       Focus entirely on Dhanush's professional achievements.
     `;
 
-    let responseText = "";
-    
-    try {
-      // Try gemini-1.5-flash first
-      const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
-      const result = await model.generateContent({
-        contents: [{ role: "user", parts: [{ text: `System Instruction: ${systemInstruction}\n\nUser Question: ${message}` }] }]
-      });
-      responseText = result.response.text();
-    } catch (flashError) {
-      console.warn("Flash model failed, falling back to gemini-pro", flashError);
-      try {
-        // Fallback to gemini-pro
-        const model = genAI.getGenerativeModel({ model: "gemini-pro" });
-        const result = await model.generateContent({
-          contents: [{ role: "user", parts: [{ text: `System Instruction: ${systemInstruction}\n\nUser Question: ${message}` }] }]
-        });
-        responseText = result.response.text();
-      } catch (proError: any) {
-        throw new Error(`AI processing failed on all models: ${proError.message}`);
-      }
-    }
+    // Try a direct REST API call instead of using the SDK to bypass any SDK versioning bugs
+    const model = "gemini-1.5-flash";
+    const url = `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${apiKey}`;
 
-    return NextResponse.json({ 
-      reply: responseText || "I'm sorry, I couldn't generate a response."
+    const payload = {
+      system_instruction: {
+        parts: { text: systemInstruction }
+      },
+      contents: [
+        {
+          role: "user",
+          parts: [{ text: message }]
+        }
+      ]
+    };
+
+    const response = await fetch(url, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(payload)
     });
 
+    const data = await response.json();
+
+    if (!response.ok) {
+      console.error("Gemini Direct API Error:", data);
+      throw new Error(data.error?.message || `HTTP ${response.status}: ${response.statusText}`);
+    }
+
+    const responseText = data.candidates?.[0]?.content?.parts?.[0]?.text;
+
+    if (!responseText) {
+      return NextResponse.json({ 
+        reply: `❌ AI API ERROR: Received empty response from Google.` 
+      });
+    }
+
+    return NextResponse.json({ reply: responseText });
+
   } catch (error: any) {
-    console.error("Gemini API Error:", error);
+    console.error("Gemini API General Error:", error);
     return NextResponse.json({ 
-      reply: `❌ AI ERROR: ${error.message || "Unknown error occurred during processing."}` 
-    }, { status: 200 }); // Return 200 so the UI displays the error message string
+      reply: `❌ SYSTEM ERROR: ${error.message}` 
+    });
   }
 }
