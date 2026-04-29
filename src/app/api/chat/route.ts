@@ -56,8 +56,8 @@ export async function POST(req: Request) {
       Focus entirely on Dhanush's professional achievements.
     `;
 
-    // Try multiple models directly to find one your key has access to
-    const modelsToTry = ["gemini-1.5-flash", "gemini-1.5-pro", "gemini-1.0-pro", "gemini-pro"];
+    // Use the correct model versions available for this API key
+    const modelsToTry = ["gemini-2.5-flash", "gemini-2.0-flash", "gemini-2.0-flash-lite"];
     let responseText = "";
     let lastError = "";
 
