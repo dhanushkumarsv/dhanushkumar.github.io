@@ -66,8 +66,10 @@ export async function POST(req: Request) {
       reply: responseText || "I'm sorry, I couldn't generate a response."
     });
 
-  } catch (error) {
+  } catch (error: any) {
     console.error("Gemini API Error:", error);
-    return NextResponse.json({ error: "Failed to process chat" }, { status: 500 });
+    return NextResponse.json({ 
+      reply: `❌ AI ERROR: ${error.message || "Unknown error occurred during processing."}` 
+    }, { status: 200 }); // Return 200 so the UI displays the error message string
   }
 }
