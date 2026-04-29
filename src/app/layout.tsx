@@ -17,6 +17,9 @@ export const metadata: Metadata = {
   title: "Dhanush Kumar | Chemical Engineer Portfolio",
   description: "Portfolio of Dhanush Kumar S V, a Chemical Engineering Graduate Student specializing in Process Simulation, Integration, and Data Analysis.",
   keywords: ["Chemical Engineer", "Process Simulation", "Aspen Plus", "GAMS", "Wastewater Treatment", "Hydrogen Systems", "Portfolio"],
+  verification: {
+    google: "wHdqDjNIq7rrIFk1Cx-4ypUJcWCt0KEPkiTY962sbbU",
+  },
 };
 
 export default function RootLayout({
