@@ -6,9 +6,9 @@ export async function POST(req: Request) {
     const { message } = await req.json();
 
     const apiKey = process.env.GEMINI_API_KEY;
-    if (!apiKey) {
+    if (!apiKey || apiKey === "PASTE_YOUR_KEY_HERE") {
       return NextResponse.json({ 
-        reply: "The AI is currently in 'Design Mode'. To enable full AI chat, please add your GEMINI_API_KEY to Vercel Environment Variables." 
+        reply: "⚠️ AI CONFIGURATION ERROR: Your Gemini API Key is missing. Please add GEMINI_API_KEY to your Vercel Environment Variables. The AI brain cannot function without it." 
       });
     }
 

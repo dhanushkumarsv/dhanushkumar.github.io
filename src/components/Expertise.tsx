@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Laptop, Cpu, LineChart, FileText, BrainCircuit, X, Loader2, MapPin } from "lucide-react";
+import { Laptop, Cpu, LineChart, FileText, BrainCircuit, X, Loader2 } from "lucide-react";
 
 const skillCategories = [
   {
@@ -11,9 +11,9 @@ const skillCategories = [
     skills: ["Aspen Plus", "Aspen HYSYS", "MATLAB", "GAMS"]
   },
   {
-    title: "Spatial Analysis",
-    icon: MapPin,
-    skills: ["ArcGIS Pro", "Site Selection", "Spatial Modeling"]
+    title: "Documentation",
+    icon: FileText,
+    skills: ["Process Flow Reports", "Technical Writing", "Design of Experiments"]
   },
   {
     title: "Data Analysis",

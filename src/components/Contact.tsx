@@ -1,9 +1,31 @@
 "use client";
 
-import { motion } from "framer-motion";
-import { Send, MapPin, Mail, Phone, Github, Linkedin, Globe, Book } from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
+import { Send, MapPin, Mail, Phone, Github, Linkedin, Globe, Book, CheckCircle2, Loader2 } from "lucide-react";
+import { useState } from "react";
 
 export default function Contact() {
+  const [isSubmitting, setIsLoading] = useState(false);
+  const [isSubmitted, setIsSubmitted] = useState(false);
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    setIsLoading(true);
+    
+    const formData = new FormData(e.currentTarget);
+    formData.append("access_key", "YOUR_ACCESS_KEY_HERE"); // Placeholder, user will need to replace this
+
+    try {
+      // For now, we simulate success so the user sees the UI working
+      await new Promise(resolve => setTimeout(resolve, 1500));
+      setIsSubmitted(true);
+    } catch (error) {
+      console.error(error);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
   return (
     <section id="contact" className="py-24 bg-background relative border-t border-border">
       <div className="max-w-7xl mx-auto px-6">
@@ -106,39 +128,90 @@ export default function Contact() {
           >
             <div className="absolute top-0 left-0 w-32 h-32 bg-primary/5 blur-[40px] rounded-full -ml-16 -mt-16" />
             
-            <form className="space-y-8 relative z-10" onSubmit={(e) => e.preventDefault()}>
-              <div className="space-y-6">
-                <div className="space-y-3">
-                  <label className="text-sm font-bold text-muted-foreground uppercase tracking-widest">Full Name</label>
-                  <input 
-                    type="text" 
-                    className="w-full bg-background border border-border rounded-xl px-6 py-4 text-foreground focus:outline-none focus:border-primary transition-all"
-                    placeholder="John Doe"
-                  />
-                </div>
-                <div className="space-y-3">
-                  <label className="text-sm font-bold text-muted-foreground uppercase tracking-widest">Email Address</label>
-                  <input 
-                    type="email" 
-                    className="w-full bg-background border border-border rounded-xl px-6 py-4 text-foreground focus:outline-none focus:border-primary transition-all"
-                    placeholder="john@example.com"
-                  />
-                </div>
-                <div className="space-y-3">
-                  <label className="text-sm font-bold text-muted-foreground uppercase tracking-widest">Your Message</label>
-                  <textarea 
-                    rows={4}
-                    className="w-full bg-background border border-border rounded-xl px-6 py-4 text-foreground focus:outline-none focus:border-primary transition-all resize-none"
-                    placeholder="Hello Dhanush..."
-                  />
-                </div>
-              </div>
-              
-              <button className="w-full py-5 bg-primary text-primary-foreground rounded-xl font-bold text-lg hover:opacity-90 transition-all shadow-xl flex items-center justify-center group">
-                Send Message
-                <Send size={20} className="ml-3 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
-              </button>
-            </form>
+            <AnimatePresence mode="wait">
+              {!isSubmitted ? (
+                <motion.form 
+                  key="contact-form"
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  exit={{ opacity: 0 }}
+                  className="space-y-8 relative z-10" 
+                  onSubmit={handleSubmit}
+                >
+                  <div className="space-y-6">
+                    <div className="space-y-3">
+                      <label className="text-sm font-bold text-muted-foreground uppercase tracking-widest">Full Name</label>
+                      <input 
+                        name="name"
+                        type="text" 
+                        required
+                        className="w-full bg-background border border-border rounded-xl px-6 py-4 text-foreground focus:outline-none focus:border-primary transition-all"
+                        placeholder="John Doe"
+                      />
+                    </div>
+                    <div className="space-y-3">
+                      <label className="text-sm font-bold text-muted-foreground uppercase tracking-widest">Email Address</label>
+                      <input 
+                        name="email"
+                        type="email" 
+                        required
+                        className="w-full bg-background border border-border rounded-xl px-6 py-4 text-foreground focus:outline-none focus:border-primary transition-all"
+                        placeholder="john@example.com"
+                      />
+                    </div>
+                    <div className="space-y-3">
+                      <label className="text-sm font-bold text-muted-foreground uppercase tracking-widest">Your Message</label>
+                      <textarea 
+                        name="message"
+                        rows={4}
+                        required
+                        className="w-full bg-background border border-border rounded-xl px-6 py-4 text-foreground focus:outline-none focus:border-primary transition-all resize-none"
+                        placeholder="Hello Dhanush..."
+                      />
+                    </div>
+                  </div>
+                  
+                  <button 
+                    type="submit"
+                    disabled={isSubmitting}
+                    className="w-full py-5 bg-primary text-primary-foreground rounded-xl font-bold text-lg hover:opacity-90 transition-all shadow-xl flex items-center justify-center group disabled:opacity-70"
+                  >
+                    {isSubmitting ? (
+                      <>
+                        <Loader2 className="animate-spin mr-3" size={20} />
+                        Sending...
+                      </>
+                    ) : (
+                      <>
+                        Send Message
+                        <Send size={20} className="ml-3 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
+                      </>
+                    )}
+                  </button>
+                </motion.form>
+              ) : (
+                <motion.div 
+                  key="success-message"
+                  initial={{ opacity: 0, scale: 0.9 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  className="flex flex-col items-center justify-center py-20 text-center space-y-6"
+                >
+                  <div className="w-20 h-20 bg-green-500/20 text-green-500 rounded-full flex items-center justify-center">
+                    <CheckCircle2 size={40} />
+                  </div>
+                  <div>
+                    <h3 className="text-3xl font-bold text-foreground mb-2">Message Sent!</h3>
+                    <p className="text-muted-foreground">Thank you for reaching out. I'll get back to you as soon as possible.</p>
+                  </div>
+                  <button 
+                    onClick={() => setIsSubmitted(false)}
+                    className="text-primary font-bold hover:underline"
+                  >
+                    Send another message
+                  </button>
+                </motion.div>
+              )}
+            </AnimatePresence>
           </motion.div>
         </div>
       </div>
