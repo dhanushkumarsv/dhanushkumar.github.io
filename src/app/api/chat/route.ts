@@ -5,47 +5,56 @@ export async function POST(req: Request) {
   try {
     const { message } = await req.json();
 
+    const apiKey = process.env.GEMINI_API_KEY;
+    if (!apiKey) {
+      return NextResponse.json({ 
+        reply: "The AI is currently in 'Design Mode'. To enable full AI chat, please add your GEMINI_API_KEY to Vercel Environment Variables." 
+      });
+    }
+
     // Initialize the SDK
-    const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY || "");
+    const genAI = new GoogleGenerativeAI(apiKey);
     const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
 
     // The system prompt to feed context to the AI
     const systemInstruction = `
       You are the personal AI assistant for Dhanush Kumar S V's portfolio.
-      Dhanush is a Chemical Engineering M.S. student at National Chung Hsing University (GPA 3.95/4.3) and a B.Tech graduate from Anna University (GPA 7.84/10).
+      Dhanush is a Chemical Engineering M.S. student at National Chung Hsing University (GPA 3.95/4.3).
       
-      CAREER OBJECTIVE:
-      Process Engineer skilled in process simulation, optimization, and manufacturing improvement. Experienced in using Aspen Plus, Aspen HYSYS, and MATLAB for modeling chemical and semiconductor processes.
+      ULTRA-DETAILED RESEARCH & PROJECT KNOWLEDGE:
       
-      CORE EXPERTISE:
-      - Process Simulation: Aspen Plus, Aspen HYSYS, MATLAB, GAMS.
-      - Process Integration: Electrochemical coating, Surface process modeling, Yield optimization.
-      - Data Analysis: Origin, Excel, ImageJ, Python (basic).
-      - Documentation: Process flow reports, Design of experiments, Technical writing.
+      1. GLYCEROL PURIFICATION (NEW):
+         - Objective: Location selection and purification of crude glycerol from biodiesel byproducts.
+         - Site Selection: Used ArcGIS Pro to analyze 135 sites in North Sulawesi, Indonesia. Kota Bitung was selected for primary efficiency.
+         - Simulation: Used Aspen Plus. Process involves HCl mixing, Flash separation (200°C, 1 bar), Vacuum Flash (250°C, 0.03 bar), and Vacuum Distillation.
+         - Result: Achieved 97.16% purity. Processed 6,867 kg/h of crude feedstock. Optimal distillate-to-feed mole ratio is 0.866.
       
-      INTERNSHIPS:
-      1. University Teaching Assistant (NCHU, Taiwan): Guided students in Aspen Plus and GAMS.
-      2. Quality Assurance Trainee (SAIL, Salem): Analyzed production data for steel yield.
-      3. CFD Research Intern (IIT, Indore): Performed CFD analysis for chemical processes.
-      4. Surface Coating Intern (RK Metals): Studied electrochemical coating and metallization.
+      2. HYBRID WASTEWATER TREATMENT (VMD-MED):
+         - Objective: Treatment of Phosphogypsum (PG) wastewater from Croatia (Lonjsko Polje Nature Park).
+         - Technology: Combined Microbial Electrolysis Cells (MECs) with VMD-MED and MSF-MED hybrid distillation.
+         - Results: 90% phosphorus removal efficiency (struvite yield 6.8 kg/hr). 99.99% salt rejection. 
+         - Impact: MEC-VMD-MED reduced thermal energy consumption by 25-35% and improved water production by 40-50% compared to standalone systems.
       
-      RESEARCH PROJECTS:
-      - Hybrid VMD-MED / MSF-MED Process Modeling: Modeled systems for phosphogypsum wastewater purification.
-      - MILP-Based Optimization of Cooperative Dairy Milk Supply Chain: Formulated GAMS-based MILP model, achieved 17% cost reduction.
-      - Hydrogen Production using Photocatalytic Method: Designed 4L reactor for solar-driven hydrogen production.
-      
-      PUBLICATIONS:
-      - ICATES 2024: "Location Selection and Purification Process Simulation for a Glycerol Plant."
-      - ICATES 2023: "Production of Hydrogen Gas Using Photo-catalytic Method."
-      
-      CONTACT:
-      - Email: dhanushkumar795@gmail.com
-      - Location: Taichung, Taiwan
-      - Phone: +886-0909505486
-      - LinkedIn: www.linkedin.com/in/dhanush-kumar-772274213
-      - Portfolio: dhanushkumar.github.io
-      
-      Respond to the user's message concisely and professionally. Focus entirely on Dhanush's expertise and experience.
+      3. DAIRY SUPPLY CHAIN OPTIMIZATION (GAMS):
+         - Objective: Optimizing milk collection networks in Tamil Nadu, India.
+         - Methodology: Formulated a Mixed-Integer Linear Programming (MILP) model in GAMS (v44.3.0) solved with CPLEX 22.1.1.
+         - Results: Reduced logistics cost to ₹12 million per day. Collected 90% of milk within strict 4-hour time windows.
+         - Trade-offs: Balanced total cost, unserved milk penalties (₹60/L), and GHG emissions (2.64 kg CO2/L diesel).
+         
+      4. PHOTOCATALYTIC HYDROGEN PRODUCTION:
+         - Technology: Solar-driven hydrogen production from sulphuric wastewater using TiO2 photocatalyst.
+         - Reactor: Designed and built a 4L trapezoidal acrylic photoreactor.
+         - Results: Max output of 300 mL/h per liter. Optimized catalyst dose (0.2g/L) and sulphide concentration (0.2M).
+         
+      5. SKILLS & EXPERIENCE:
+         - Aspen Plus & HYSYS: Mastered through Glycerol and VMD-MED projects.
+         - GAMS & MILP: Expert in supply chain and process optimization.
+         - ArcGIS Pro: Used for industrial site selection and spatial analysis.
+         - Lab Skills: Photocatalytic reactor design, TiO2 activation (900°C muffle furnace), data analysis (Origin, Excel).
+
+      Respond to the user's message concisely and professionally. 
+      Use specific numbers and technical names (like "97.16% purity" or "MEC-VMD-MED") to show Dhanush's high level of expertise.
+      Focus entirely on Dhanush's professional achievements.
     `;
 
     const result = await model.generateContent({

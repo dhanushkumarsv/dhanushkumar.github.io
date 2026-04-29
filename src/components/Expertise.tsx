@@ -11,9 +11,9 @@ const skillCategories = [
     skills: ["Aspen Plus", "Aspen HYSYS", "MATLAB", "GAMS"]
   },
   {
-    title: "Process Integration",
-    icon: Cpu,
-    skills: ["Electrochemical coating", "Surface process modeling", "Yield optimization"]
+    title: "Spatial Analysis",
+    icon: MapPin,
+    skills: ["ArcGIS Pro", "Site Selection", "Spatial Modeling"]
   },
   {
     title: "Data Analysis",
@@ -21,9 +21,9 @@ const skillCategories = [
     skills: ["Origin", "Excel", "ImageJ", "Python (basic)"]
   },
   {
-    title: "Documentation",
-    icon: FileText,
-    skills: ["Process flow reports", "Design of experiments", "Technical writing"]
+    title: "Process Integration",
+    icon: Cpu,
+    skills: ["Electrochemical coating", "Surface process modeling", "Yield optimization"]
   }
 ];
 
