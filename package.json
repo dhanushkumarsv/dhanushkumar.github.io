@@ -1,7 +1,8 @@
 {
-  "name": "next-portfolio",
-  "version": "0.1.0",
+  "name": "process-nexus",
+  "version": "1.0.0",
   "private": true,
+  "description": "The Process Nexus — cinematic 3D portfolio of Dhanush Kumar S V, chemical engineering graduate researcher",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
@@ -9,20 +10,24 @@
     "lint": "eslint"
   },
   "dependencies": {
-    "@google/generative-ai": "latest",
-    "clsx": "^2.1.1",
-    "framer-motion": "^11.1.7",
-    "lucide-react": "^0.378.0",
+    "@react-three/drei": "^10.5.1",
+    "@react-three/fiber": "^9.3.0",
+    "@react-three/postprocessing": "^3.0.4",
+    "framer-motion": "^11.18.2",
+    "gsap": "^3.12.7",
+    "lucide-react": "^0.468.0",
     "next": "16.2.4",
     "react": "19.2.4",
     "react-dom": "19.2.4",
-    "tailwind-merge": "^2.3.0"
+    "three": "^0.180.0",
+    "zustand": "^5.0.3"
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4",
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
+    "@types/three": "^0.180.0",
     "eslint": "^9",
     "eslint-config-next": "16.2.4",
     "tailwindcss": "^4",
