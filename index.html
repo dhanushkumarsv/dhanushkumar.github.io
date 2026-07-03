@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="pro">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dhanush Kumar S V — Process Engineer</title>
+  <meta name="description" content="Portfolio of Dhanush Kumar S V — Process Engineer specializing in process simulation, optimization, and manufacturing improvement." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Bangers&family=Bebas+Neue&family=Playfair+Display:wght@600;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚗️</text></svg>" />
+</head>
+<body>
+
+  <!-- ================= NAVBAR ================= -->
+  <header class="navbar" id="navbar">
+    <div class="nav-inner">
+      <a href="#hero" class="logo">
+        <span class="logo-badge">DK</span>
+        <span class="logo-text">Dhanush<span class="logo-dot">.</span></span>
+      </a>
+
+      <nav class="nav-links" id="navLinks">
+        <a href="#about">About</a>
+        <a href="#expertise">Expertise</a>
+        <a href="#research">Research</a>
+        <a href="#experience">Experience</a>
+        <a href="#publications">Publications</a>
+        <a href="#resume">Resume</a>
+        <a href="#chatbot">Ask Me</a>
+        <a href="#contact">Contact</a>
+      </nav>
+
+      <div class="nav-right">
+        <!-- Theme switcher -->
+        <div class="theme-switcher" role="group" aria-label="Choose theme">
+          <button class="theme-btn" data-set-theme="spidey" title="Spidey Mode — bright &amp; bold" aria-label="Spidey theme">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2c.4 0 .8.3.9.7l.6 2.4 2.1-1.4c.4-.2.9-.2 1.2.2.3.3.3.8.1 1.2l-1.4 2.1 2.4.6c.4.1.7.5.7.9s-.3.8-.7.9l-2.4.6 1.4 2.1c.2.4.2.9-.1 1.2-.3.4-.8.4-1.2.2l-2.1-1.4-.6 2.4c-.1.4-.5.7-.9.7s-.8-.3-.9-.7l-.6-2.4-2.1 1.4c-.4.2-.9.2-1.2-.2-.3-.3-.3-.8-.1-1.2l1.4-2.1-2.4-.6c-.4-.1-.7-.5-.7-.9s.3-.8.7-.9l2.4-.6-1.4-2.1c-.2-.4-.2-.9.1-1.2.3-.4.8-.4 1.2-.2l2.1 1.4.6-2.4c.1-.4.5-.7.9-.7zm0 7.5a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5z"/><path d="M12 15.5v6.5m0-13.5V2m3.5 10H22M2 12h6.5" stroke="currentColor" stroke-width="1.2" fill="none"/></svg>
+          </button>
+          <button class="theme-btn" data-set-theme="batman" title="Gotham Mode — dark knight" aria-label="Batman theme">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 4c.5 1.2.7 2 .7 2s.6-.3 1.3-.3c.2-.9.6-1.7 1.2-2.4.3 1 .4 2.1.3 3.1 2.7.9 5.3 2.9 6.5 6.1-1.6-1-3.2-1.5-4.7-1.5-.9 1.6-1.6 4-2.3 7-.5-1.5-1.2-2.7-2.1-3.6-.3-.3-.6-.4-.9-.4s-.6.1-.9.4c-.9.9-1.6 2.1-2.1 3.6-.7-3-1.4-5.4-2.3-7-1.5 0-3.1.5-4.7 1.5 1.2-3.2 3.8-5.2 6.5-6.1-.1-1 0-2.1.3-3.1.6.7 1 1.5 1.2 2.4.7 0 1.3.3 1.3.3s.2-.8.7-2z"/></svg>
+          </button>
+          <button class="theme-btn" data-set-theme="pro" title="Professional Mode — clean &amp; classic" aria-label="Professional theme">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M10 4a2 2 0 0 0-2 2v1H5a2 2 0 0 0-2 2v3.5h18V9a2 2 0 0 0-2-2h-3V6a2 2 0 0 0-2-2h-4zm0 2h4v1h-4V6zm-7 8.5V18a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-3.5h-8V16h-2v-1.5H3z"/></svg>
+          </button>
+        </div>
+
+        <button class="hamburger" id="hamburger" aria-label="Toggle menu">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- ================= HERO ================= -->
+  <section class="hero" id="hero">
+    <canvas id="particles" aria-hidden="true"></canvas>
+
+    <!-- Theme decorations -->
+    <div class="hero-decor decor-spidey" aria-hidden="true">
+      <svg class="web-corner web-tl" viewBox="0 0 200 200" fill="none" stroke="currentColor">
+        <path d="M0 0 L200 200 M0 0 L200 90 M0 0 L90 200 M0 0 L200 20 M0 0 L20 200"/>
+        <path d="M40 8 Q44 44 8 40 M85 18 Q92 92 18 85 M135 28 Q148 148 28 135 M185 40 Q205 205 40 185"/>
+      </svg>
+      <svg class="web-corner web-br" viewBox="0 0 200 200" fill="none" stroke="currentColor">
+        <path d="M200 200 L0 0 M200 200 L0 110 M200 200 L110 0 M200 200 L0 180 M200 200 L180 0"/>
+        <path d="M160 192 Q156 156 192 160 M115 182 Q108 108 182 115 M65 172 Q52 52 172 65 M15 160 Q-5 -5 160 15"/>
+      </svg>
+    </div>
+    <div class="hero-decor decor-batman" aria-hidden="true">
+      <div class="bat-signal"></div>
+      <svg class="skyline" viewBox="0 0 1440 220" preserveAspectRatio="none" fill="currentColor">
+        <path d="M0 220 L0 140 L40 140 L40 100 L60 100 L60 60 L75 60 L75 100 L95 100 L95 140 L130 140 L130 90 L180 90 L180 40 L195 40 L195 20 L205 20 L205 40 L220 40 L220 90 L260 90 L260 150 L300 150 L300 110 L340 110 L340 70 L360 70 L360 110 L400 110 L400 150 L460 150 L460 80 L470 80 L470 55 L480 55 L480 80 L530 80 L530 150 L580 150 L580 120 L640 120 L640 50 L655 50 L655 30 L665 30 L665 50 L680 50 L680 120 L740 120 L740 160 L800 160 L800 100 L850 100 L850 60 L870 60 L870 100 L920 100 L920 160 L980 160 L980 110 L1030 110 L1030 70 L1045 70 L1045 45 L1055 45 L1055 70 L1070 70 L1070 110 L1120 110 L1120 160 L1180 160 L1180 90 L1240 90 L1240 130 L1300 130 L1300 80 L1330 80 L1330 40 L1345 40 L1345 80 L1380 80 L1380 130 L1440 130 L1440 220 Z"/>
+      </svg>
+    </div>
+    <div class="hero-decor decor-pro" aria-hidden="true">
+      <div class="blob blob-1"></div>
+      <div class="blob blob-2"></div>
+    </div>
+
+    <div class="hero-content">
+      <p class="hero-kicker reveal">
+        <span class="kicker-spidey">🕸️ Your friendly neighborhood engineer</span>
+        <span class="kicker-batman">🦇 The engineer Gotham deserves</span>
+        <span class="kicker-pro">Welcome to my portfolio</span>
+      </p>
+      <h1 class="hero-name reveal">Dhanush Kumar <span class="accent">S V</span></h1>
+      <h2 class="hero-role reveal"><span id="typewriter"></span><span class="caret">|</span></h2>
+      <p class="hero-summary reveal">
+        Turning complex chemical processes into optimized, efficient systems —
+        with <strong>Aspen Plus</strong>, <strong>Aspen HYSYS</strong>, <strong>MATLAB</strong> and
+        a passion for data-driven improvement.
+      </p>
+      <div class="hero-cta reveal">
+        <a href="#resume" class="btn btn-primary">📄 Download Resume</a>
+        <a href="#chatbot" class="btn btn-ghost">🤖 Ask My Assistant</a>
+      </div>
+
+      <div class="hero-stats reveal">
+        <div class="stat">
+          <span class="stat-num" data-count="3.95" data-decimals="2">0</span>
+          <span class="stat-label">M.S. GPA / 4.3</span>
+        </div>
+        <div class="stat">
+          <span class="stat-num"><span data-count="17">0</span>%</span>
+          <span class="stat-label">Supply-chain cost cut</span>
+        </div>
+        <div class="stat">
+          <span class="stat-num"><span data-count="300">0</span></span>
+          <span class="stat-label">mL·h⁻¹·L⁻¹ H₂ produced</span>
+        </div>
+        <div class="stat">
+          <span class="stat-num"><span data-count="4">0</span>+</span>
+          <span class="stat-label">Industry internships</span>
+        </div>
+      </div>
+    </div>
+
+    <a href="#about" class="scroll-hint" aria-label="Scroll down"><span></span></a>
+  </section>
+
+  <!-- ================= ABOUT ================= -->
+  <section class="section" id="about">
+    <div class="container">
+      <p class="section-kicker reveal">01 · Who I am</p>
+      <h2 class="section-title reveal">About <span class="accent">Me</span></h2>
+      <div class="about-grid">
+        <div class="about-text reveal">
+          <p>
+            I'm a <strong>Process Engineer</strong> based in Taichung, Taiwan, currently pursuing my
+            M.S. in Chemical Engineering at <strong>National Chung Hsing University</strong> with a
+            GPA of 3.95/4.3. I specialize in <strong>process simulation, optimization, and
+            manufacturing improvement</strong>.
+          </p>
+          <p>
+            My work spans modeling chemical and semiconductor processes with Aspen Plus, Aspen HYSYS
+            and MATLAB, with a strong grounding in <strong>yield improvement, defect reduction, and
+            process integration</strong>. I'm dedicated to enhancing production efficiency and product
+            quality through data-driven analysis and continuous improvement.
+          </p>
+          <div class="lang-chips">
+            <span class="chip">🇬🇧 English — Fluent</span>
+            <span class="chip">🇹🇼 Chinese — Basic</span>
+            <span class="chip">🇮🇳 Tamil — Native</span>
+          </div>
+        </div>
+        <div class="about-side reveal">
+          <div class="edu-card">
+            <div class="edu-icon">🎓</div>
+            <h3>National Chung Hsing University</h3>
+            <p class="edu-degree">M.S. in Chemical Engineering</p>
+            <p class="edu-meta">Taichung, Taiwan · 2024 – Present</p>
+            <span class="edu-gpa">GPA 3.95 / 4.3</span>
+          </div>
+          <div class="edu-card">
+            <div class="edu-icon">🎓</div>
+            <h3>Anna University</h3>
+            <p class="edu-degree">B.Tech in Chemical Engineering</p>
+            <p class="edu-meta">Chennai, India · 2019 – 2023</p>
+            <span class="edu-gpa">GPA 7.84 / 10</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= EXPERTISE ================= -->
+  <section class="section section-alt" id="expertise">
+    <div class="container">
+      <p class="section-kicker reveal">02 · What I work with</p>
+      <h2 class="section-title reveal">Technical <span class="accent">Expertise</span></h2>
+      <div class="skills-grid">
+        <div class="skill-card reveal">
+          <div class="skill-icon">⚗️</div>
+          <h3>Process Simulation</h3>
+          <div class="tags">
+            <span>Aspen Plus</span><span>Aspen HYSYS</span><span>MATLAB</span><span>GAMS</span><span>Ansys Fluent</span>
+          </div>
+        </div>
+        <div class="skill-card reveal">
+          <div class="skill-icon">🔬</div>
+          <h3>Process Integration</h3>
+          <div class="tags">
+            <span>Electrochemical coating</span><span>Surface process modeling</span><span>Yield optimization</span>
+          </div>
+        </div>
+        <div class="skill-card reveal">
+          <div class="skill-icon">📊</div>
+          <h3>Data Analysis</h3>
+          <div class="tags">
+            <span>Python</span><span>Origin</span><span>Excel</span><span>ImageJ</span>
+          </div>
+        </div>
+        <div class="skill-card reveal">
+          <div class="skill-icon">📝</div>
+          <h3>Documentation</h3>
+          <div class="tags">
+            <span>Process flow reports</span><span>Design of experiments</span><span>Technical writing</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= RESEARCH ================= -->
+  <section class="section" id="research">
+    <div class="container">
+      <p class="section-kicker reveal">03 · What I've built</p>
+      <h2 class="section-title reveal">Research <span class="accent">Experience</span></h2>
+      <div class="research-grid">
+        <article class="research-card reveal">
+          <div class="research-badge">💧 Water Treatment</div>
+          <h3>Hybrid VMD–MED / MSF–MED Modeling for Phosphogypsum Wastewater</h3>
+          <ul>
+            <li>Modeled hybrid VMD–MED and MSF–MED systems for phosphogypsum wastewater purification via process simulation.</li>
+            <li>Integrated a microbial electrochemical cell (MEC) for enhanced phosphorus recovery and energy-efficient treatment.</li>
+            <li>Optimized energy use to improve water recovery, phosphorus yield, and system efficiency.</li>
+          </ul>
+          <div class="tags"><span>Aspen Plus</span><span>Desalination</span><span>Energy Analysis</span><span>MEC</span></div>
+        </article>
+        <article class="research-card reveal">
+          <div class="research-badge">🥛 Supply Chain</div>
+          <h3>MILP Optimization of a Cooperative Dairy Milk Supply Chain</h3>
+          <ul>
+            <li>Formulated a GAMS-based MILP model for village–BMC–plant milk procurement under capacity, flow-balance and service constraints.</li>
+            <li>Ran sensitivity &amp; scenario analyses on BMC capacity and penalty parameters to weigh cost–service trade-offs.</li>
+            <li><strong>~17% total cost reduction</strong> and up to <strong>~30% less unserved milk</strong>; identified key capacity thresholds.</li>
+          </ul>
+          <div class="tags"><span>GAMS</span><span>MILP</span><span>Optimization</span><span>Scenario Analysis</span></div>
+        </article>
+        <article class="research-card reveal">
+          <div class="research-badge">⚡ Green Energy</div>
+          <h3>Photocatalytic Hydrogen Production</h3>
+          <ul>
+            <li>Designed &amp; built a 4 L trapezoidal photocatalytic reactor for solar-driven H₂ production from sulphuric wastewater.</li>
+            <li>Achieved <strong>~300 mL h⁻¹ L⁻¹</strong> hydrogen production with TiO₂ photocatalyst under direct sunlight.</li>
+            <li>Optimized catalyst loading and sulphide concentration for maximum yield and efficiency.</li>
+          </ul>
+          <div class="tags"><span>Green Hydrogen</span><span>TiO₂</span><span>Reactor Design</span><span>Photocatalysis</span></div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= EXPERIENCE ================= -->
+  <section class="section section-alt" id="experience">
+    <div class="container">
+      <p class="section-kicker reveal">04 · Where I've worked</p>
+      <h2 class="section-title reveal">Internships &amp; <span class="accent">Experience</span></h2>
+      <div class="timeline">
+        <div class="tl-item reveal">
+          <div class="tl-dot"></div>
+          <div class="tl-card">
+            <span class="tl-period">Sep 2025 – Dec 2025</span>
+            <h3>University Teaching Assistant</h3>
+            <p class="tl-org">National Chung Hsing University, Taiwan</p>
+            <ul>
+              <li>Guided students in Aspen Plus process simulation, troubleshooting modeling &amp; convergence issues.</li>
+              <li>Supported design and optimization of chemical processes through hands-on simulation exercises.</li>
+              <li>Taught optimization concepts in GAMS — constraints, objective functions, structured problem solving.</li>
+            </ul>
+          </div>
+        </div>
+        <div class="tl-item reveal">
+          <div class="tl-dot"></div>
+          <div class="tl-card">
+            <span class="tl-period">Oct 2022 – Nov 2022</span>
+            <h3>Quality Assurance Trainee</h3>
+            <p class="tl-org">Steel Authority of India Limited (SAIL), Salem</p>
+            <ul>
+              <li>Analyzed hot &amp; cold rolling line production data to find factors affecting steel yield and quality.</li>
+              <li>Investigated manufacturing defects; contributed to root-cause analysis for process improvement.</li>
+            </ul>
+          </div>
+        </div>
+        <div class="tl-item reveal">
+          <div class="tl-dot"></div>
+          <div class="tl-card">
+            <span class="tl-period">Nov 2021 – Jan 2022</span>
+            <h3>CFD Research Intern</h3>
+            <p class="tl-org">Indian Institute of Technology, Indore</p>
+            <ul>
+              <li>Performed CFD analysis for chemical processes; learned parameter optimization &amp; reporting techniques.</li>
+            </ul>
+          </div>
+        </div>
+        <div class="tl-item reveal">
+          <div class="tl-dot"></div>
+          <div class="tl-card">
+            <span class="tl-period">Aug 2021</span>
+            <h3>Surface Coating Intern</h3>
+            <p class="tl-org">RK Metals</p>
+            <ul>
+              <li>Studied electrochemical coating &amp; metallization methods for industrial surface treatment.</li>
+              <li>Evaluated coating thickness, adhesion, and corrosion resistance.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= PUBLICATIONS ================= -->
+  <section class="section" id="publications">
+    <div class="container">
+      <p class="section-kicker reveal">05 · What I've published</p>
+      <h2 class="section-title reveal">Publications &amp; <span class="accent">Conferences</span></h2>
+      <div class="pub-list">
+        <div class="pub-card reveal">
+          <div class="pub-year">2024</div>
+          <div>
+            <h3>“Location Selection and Purification Process Simulation for a Glycerol Plant”</h3>
+            <p>ICATES 2024 — International Conference</p>
+          </div>
+        </div>
+        <div class="pub-card reveal">
+          <div class="pub-year">2023</div>
+          <div>
+            <h3>“Production of Hydrogen Gas Using Photo-catalytic Method”</h3>
+            <p>ICATS 2023 — International Conference</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= RESUME ================= -->
+  <section class="section section-alt" id="resume">
+    <div class="container">
+      <p class="section-kicker reveal">06 · Take it with you</p>
+      <h2 class="section-title reveal">Download <span class="accent">Resume</span></h2>
+      <div class="resume-card reveal">
+        <div class="resume-info">
+          <div class="resume-icon">📄</div>
+          <div>
+            <h3>Dhanush Kumar S V — Process Engineer</h3>
+            <p>One page. Everything that matters: education, simulation expertise, research, internships &amp; publications.</p>
+            <div class="tags">
+              <span>Aspen Plus</span><span>HYSYS</span><span>MATLAB</span><span>GAMS</span><span>Python</span>
+            </div>
+          </div>
+        </div>
+        <div class="resume-actions">
+          <a class="btn btn-primary" href="assets/Dhanush_Kumar_Resume.pdf" download>⬇ Download PDF</a>
+          <a class="btn btn-ghost" href="assets/Dhanush_Kumar_Resume.docx" download>⬇ Word (.docx)</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= CHATBOT ================= -->
+  <section class="section" id="chatbot">
+    <div class="container">
+      <p class="section-kicker reveal">07 · Ask anything</p>
+      <h2 class="section-title reveal">Resume <span class="accent">Assistant</span></h2>
+      <p class="section-sub reveal">An interactive assistant that answers questions about my education, skills, research and experience.</p>
+
+      <div class="chat-shell reveal">
+        <div class="chat-header">
+          <div class="chat-avatar" id="chatAvatar">🤖</div>
+          <div>
+            <p class="chat-title" id="chatTitle">Dhanush's Assistant</p>
+            <p class="chat-status"><span class="status-dot"></span> Online — ask me anything</p>
+          </div>
+        </div>
+        <div class="chat-window" id="chatWindow" aria-live="polite"></div>
+        <div class="chat-suggestions" id="chatSuggestions"></div>
+        <form class="chat-input-row" id="chatForm">
+          <input type="text" id="chatInput" placeholder="e.g. What software does Dhanush use?" autocomplete="off" />
+          <button type="submit" class="btn btn-primary chat-send" aria-label="Send">➤</button>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= CONTACT / FOOTER ================= -->
+  <footer class="footer" id="contact">
+    <div class="container">
+      <h2 class="section-title reveal">Let's <span class="accent">Connect</span></h2>
+      <p class="footer-sub reveal">Open to process engineering roles, research collaboration, and interesting problems.</p>
+      <div class="contact-grid reveal">
+        <a class="contact-card" href="mailto:dhanushkumar795@gmail.com">
+          <span class="contact-icon">✉️</span>
+          <span class="contact-label">Email</span>
+          <span class="contact-value">dhanushkumar795@gmail.com</span>
+        </a>
+        <a class="contact-card" href="tel:+8860909505486">
+          <span class="contact-icon">📞</span>
+          <span class="contact-label">Phone</span>
+          <span class="contact-value">+886-0909505486</span>
+        </a>
+        <a class="contact-card" href="https://linkedin.com/in/dhanush-kumar-772274213" target="_blank" rel="noopener">
+          <span class="contact-icon">💼</span>
+          <span class="contact-label">LinkedIn</span>
+          <span class="contact-value">dhanush-kumar-772274213</span>
+        </a>
+        <div class="contact-card">
+          <span class="contact-icon">📍</span>
+          <span class="contact-label">Location</span>
+          <span class="contact-value">Taichung, Taiwan</span>
+        </div>
+      </div>
+      <p class="footer-note">© 2026 Dhanush Kumar S V · Built with 🧪 chemistry &amp; a little superhero energy.</p>
+    </div>
+  </footer>
+
+  <script src="js/resume-data.js"></script>
+  <script src="js/main.js"></script>
+  <script src="js/chatbot.js"></script>
+</body>
+</html>
